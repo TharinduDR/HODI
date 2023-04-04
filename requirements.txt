@@ -1,7 +1,7 @@
 pandas
 numpy
 gensim
-sklearn
+scikit-learn
 datasets
 tensorboardX
 transformers==4.16.2
