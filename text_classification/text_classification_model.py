@@ -161,7 +161,7 @@ MODELS_WITH_ADD_PREFIX_SPACE = [
 MODELS_WITHOUT_SLIDING_WINDOW_SUPPORT = ["squeezebert"]
 
 
-class ClassificationModel:
+class TextClassificationModel:
     def __init__(
         self,
         model_type,
