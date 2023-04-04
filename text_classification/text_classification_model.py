@@ -3,6 +3,8 @@
 
 
 from __future__ import absolute_import, division, print_function
+import glob
+import shutil
 import collections
 import logging
 import math
@@ -637,6 +639,10 @@ class TextClassificationModel:
         # model_to_save.save_pretrained(output_dir)
         # self.tokenizer.save_pretrained(output_dir)
         # torch.save(self.args, os.path.join(output_dir, "training_args.bin"))
+        if args.save_recent_only:
+            del_paths = glob.glob(os.path.join(output_dir, 'checkpoint-*'))
+            for del_path in del_paths:
+                shutil.rmtree(del_path)
         self.save_model(model=self.model)
 
         if verbose:
@@ -975,6 +981,10 @@ class TextClassificationModel:
 
                     if args.save_steps > 0 and global_step % args.save_steps == 0:
                         # Save model checkpoint
+                        if args.save_recent_only:
+                            del_paths = glob.glob(os.path.join(output_dir, 'checkpoint-*'))
+                            for del_path in del_paths:
+                                shutil.rmtree(del_path)
                         output_dir_current = os.path.join(
                             output_dir, "checkpoint-{}".format(global_step)
                         )
@@ -995,6 +1005,11 @@ class TextClassificationModel:
                             wandb_log=False,
                             **kwargs,
                         )
+
+                        if args.save_recent_only:
+                            del_paths = glob.glob(os.path.join(output_dir, 'checkpoint-*'))
+                            for del_path in del_paths:
+                                shutil.rmtree(del_path)
 
                         output_dir_current = os.path.join(
                             output_dir, "checkpoint-{}".format(global_step)
