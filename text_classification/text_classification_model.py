@@ -113,7 +113,7 @@ from transformers import (
 from transformers.convert_graph_to_onnx import convert, quantize
 
 
-from text_classification.classification_utils import (
+from text_classification.text_classification_utils import (
     InputExample,
     LazyClassificationDataset,
     ClassificationDataset,
